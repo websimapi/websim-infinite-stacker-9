@@ -1,0 +1,311 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #d0e7f9;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+}
+
+#game-canvas {
+    display: block;
+}
+
+#ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#score {
+    font-size: 4em;
+    margin-top: 20px;
+    display: none;
+}
+
+#instructions {
+    font-size: 1.5em;
+    position: absolute;
+    bottom: 20%;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+#instructions.hidden {
+    opacity: 0;
+}
+
+
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 10px;
+    text-align: center;
+    pointer-events: auto;
+    max-width: 90%;
+}
+
+#game-over.hidden {
+    display: none;
+}
+
+#game-over h2 {
+    margin-top: 0;
+}
+
+#replay-controls {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#submit-score-button {
+    background-color: #ff9800;
+}
+#submit-score-button:hover {
+    background-color: #f57c00;
+}
+
+#view-leaderboard-button {
+    background-color: #9C27B0;
+}
+#view-leaderboard-button:hover {
+    background-color: #7B1FA2;
+}
+
+#replay-controls.hidden {
+    display: none;
+}
+
+#replay-controls button,
+#restart-button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    pointer-events: auto;
+}
+
+#replay-controls button:hover,
+#restart-button:hover {
+    background-color: #45a049;
+}
+
+#replay-button {
+    background-color: #2196F3;
+}
+
+#replay-button:hover {
+    background-color: #0b7dda;
+}
+
+#replay-viewer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    pointer-events: auto;
+    max-width: 90%;
+    z-index: 1000;
+}
+
+#replay-viewer.hidden {
+    display: none;
+}
+
+#replay-video {
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#replay-controls-bottom {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#replay-controls-bottom button {
+    font-size: 1em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+}
+
+#replay-controls-bottom button:hover {
+    background-color: #45a049;
+}
+
+#close-replay {
+    background-color: #f44336;
+}
+
+#close-replay:hover {
+    background-color: #da190b;
+}
+
+#download-replay {
+    background-color: #2196F3;
+}
+
+#download-replay:hover {
+    background-color: #0b7dda;
+}
+
+
+/* Leaderboard Styles */
+#leaderboard-view {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    pointer-events: auto;
+    width: 90%;
+    max-width: 500px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+#leaderboard-view.hidden {
+    display: none;
+}
+
+#leaderboard-view h2 {
+    margin-top: 0;
+    color: white;
+}
+
+#leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.leaderboard-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.leaderboard-item .no-scores {
+    text-align: center;
+    width: 100%;
+    color: #ccc;
+}
+
+.leaderboard-rank {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ddd;
+    width: 40px;
+    text-align: left;
+}
+
+.leaderboard-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.leaderboard-username {
+    flex-grow: 1;
+    text-align: left;
+    color: white;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.leaderboard-score {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4CAF50;
+    min-width: 50px;
+    text-align: right;
+}
+
+#leaderboard-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    color: white;
+}
+
+#leaderboard-pagination button {
+     font-size: 1em;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+}
+
+#leaderboard-pagination button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+
+#close-leaderboard {
+    margin-top: 20px;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f44336;
+    color: white;
+    width: 100%;
+}
+#close-leaderboard:hover {
+    background-color: #da190b;
+}
