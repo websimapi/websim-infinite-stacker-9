@@ -35,7 +35,7 @@ export function setupScene() {
     const canvas = document.getElementById('game-canvas');
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.autoClear = false;
+    renderer.setClearColor(0xd0e7f9, 1);
 
     const uiScene = new THREE.Scene();
     const uiCamera = new THREE.OrthographicCamera(

@@ -202,9 +202,7 @@ function animate() {
     world.step(1 / 60);
     game.update();
     
-    renderer.clear();
     renderer.render(scene, camera);
-    renderer.clearDepth();
     renderer.render(uiScene, uiCamera);
 }
 
